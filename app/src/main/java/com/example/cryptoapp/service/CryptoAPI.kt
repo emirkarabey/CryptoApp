@@ -5,6 +5,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 
 interface CryptoAPI {
-    @GET("prices?key=91c5fc1f99664950c9fa54074cb68d65e63c2bd1")
+    @GET("atilsamancioglu/K21-JSONDataSet/master/crypto.json")
     fun getCrypto(): Single<List<Crypto>>
 }

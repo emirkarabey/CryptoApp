@@ -17,12 +17,14 @@ class CryptoAdapter(var cryptoList:ArrayList<Crypto>) :RecyclerView.Adapter<Cryp
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CryptoViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.recycler_row,parent,false)
+        println("creatviewholder")
         return CryptoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: CryptoViewHolder, position: Int) {
         holder.itemView.cryptoNameText.text=cryptoList[position].currency.toString()
         holder.itemView.cryptoPriceText.text=cryptoList[position].price.toString()
+        println(cryptoList[position].currency.toString())
     }
 
     override fun getItemCount(): Int {

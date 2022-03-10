@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/fragment_cryptos.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/fragment_cryptos.xml" value="0.20202020202020202" />
         <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/fragment_favorites.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/layout/recycler_row.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/emirk/AndroidStudioProjects/CryptoApp/app/src/main/res/menu/menu_item.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

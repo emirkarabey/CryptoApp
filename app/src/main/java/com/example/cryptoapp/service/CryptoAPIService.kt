@@ -7,7 +7,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 class CryptoAPIService {
-    private val BASE_URL = "https://api.nomics.com/v1/"
+    //https://github.com/atilsamancioglu/K21-JSONDataSet/blob/master/crypto.json
+    private val BASE_URL = "https://raw.githubusercontent.com/"
     private val api = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
