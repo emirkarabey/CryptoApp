@@ -12,10 +12,28 @@
         <action
             android:id="@+id/action_cryptosFragment_to_favoritesFragment"
             app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_cryptosFragment_self"
+            app:destination="@id/cryptosFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.cryptoapp.view.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_cryptosFragment"
+            app:destination="@id/cryptosFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_self"
+            app:destination="@id/favoritesFragment" />
+        <argument
+            android:name="crypto"
+            app:argType="com.example.cryptoapp.model.Crypto"
+            app:nullable="true" />
+        <argument
+            android:name="delete"
+            app:argType="com.example.cryptoapp.model.Crypto"
+            app:nullable="true" />
+    </fragment>
 </navigation>

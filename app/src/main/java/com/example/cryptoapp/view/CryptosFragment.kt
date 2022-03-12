@@ -6,12 +6,15 @@ import androidx.fragment.app.Fragment
 import android.widget.ProgressBar
 import android.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoapp.R
 import com.example.cryptoapp.adapter.CryptoAdapter
 import com.example.cryptoapp.model.Crypto
 import com.example.cryptoapp.viewmodel.CryptosViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_cryptos.*
 import kotlinx.coroutines.delay
 import java.util.*
@@ -35,29 +38,37 @@ class CryptosFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val searchView = item.actionView as SearchView
-        searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onQueryTextChange(p0: String?): Boolean {
-                tempArrayList.clear()
-                val searchText = p0!!.toLowerCase(Locale.getDefault())
-                if (searchText.isNotEmpty()){
-                    viewModel.cryptos.value!!.forEach {
-                        if (it.toString().toLowerCase(Locale.getDefault()).contains(searchText)){
-                            tempArrayList.add(it)
-                        }
-                    }
-                    cryptoAdapter.cryptoListUpdate(tempArrayList)
-                }else{
-                    observeLiveData()
+        if (item.itemId==R.id.search_action){
+            val searchView = item.actionView as SearchView
+            searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(p0: String?): Boolean {
+                    TODO("Not yet implemented")
                 }
-                return false
-            }
 
-        })
+                override fun onQueryTextChange(p0: String?): Boolean {
+                    tempArrayList.clear()
+                    val searchText = p0!!.toLowerCase(Locale.getDefault())
+                    if (searchText.isNotEmpty()){
+                        viewModel.cryptos.value!!.forEach {
+                            if (it.toString().toLowerCase(Locale.getDefault()).contains(searchText)){
+                                tempArrayList.add(it)
+                            }
+                        }
+                        cryptoAdapter.cryptoListUpdate(tempArrayList)
+                    }else{
+                        observeLiveData()
+                    }
+                    return false
+                }
+
+            })
+        }else if(item.itemId==R.id.spot){
+            val action = CryptosFragmentDirections.actionCryptosFragmentSelf()
+            Navigation.findNavController(requireView()).navigate(action)
+        }else if(item.itemId==R.id.favorites){
+            val action = CryptosFragmentDirections.actionCryptosFragmentToFavoritesFragment(null,null)
+            Navigation.findNavController(requireView()).navigate(action)
+        }
         return super.onOptionsItemSelected(item)
     }
     override fun onCreateView(
@@ -65,9 +76,6 @@ class CryptosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-
-
         return inflater.inflate(R.layout.fragment_cryptos, container, false)
     }
 

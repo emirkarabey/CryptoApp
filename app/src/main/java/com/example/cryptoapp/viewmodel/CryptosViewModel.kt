@@ -10,6 +10,7 @@ import com.example.cryptoapp.adapter.CryptoAdapter
 import com.example.cryptoapp.model.Crypto
 import com.example.cryptoapp.service.CryptoAPIService
 import com.example.cryptoapp.service.CryptoDatabase
+import com.example.cryptoapp.service.FavoritesDatabase
 import com.example.cryptoapp.util.MySharedPreferences
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

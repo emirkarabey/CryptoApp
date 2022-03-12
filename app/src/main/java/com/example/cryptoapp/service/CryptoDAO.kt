@@ -15,4 +15,6 @@ interface CryptoDAO {
     suspend fun getCrypto(cryptoID : Int):Crypto
     @Query("DELETE FROM crypto")
     suspend fun deleteAllCrypto()
+    @Query("DELETE FROM crypto WHERE uuid=:cryptoID")
+    suspend fun deleteCrypto(cryptoID: Int)
 }
