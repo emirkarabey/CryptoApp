@@ -28,6 +28,7 @@ class CryptoAdapter(var cryptoList:ArrayList<Crypto>) :RecyclerView.Adapter<Cryp
         holder.itemView.cryptoPriceText.text=cryptoList[position].price.toString()
         if (cryptoList[position].favorite==true){
             holder.itemView.fav_btn.setBackgroundResource(R.drawable.ic_baseline_favorite_clicked_24)
+            //println("bu favorilere eklenmiş"+cryptoList[position].currency)
         }
         holder.itemView.fav_btn.setOnClickListener{
             it.setBackgroundResource(R.drawable.ic_baseline_favorite_clicked_24)

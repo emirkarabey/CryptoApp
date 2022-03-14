@@ -18,15 +18,16 @@ class FavoritesViewModel(application: Application) : BaseViewModel(application){
     fun addSQLite(crypto:Crypto){
         progressBar.value=true
         launch {
-            val dao = FavoritesDatabase(getApplication()).cryptoDAO()
+            val dao = FavoritesDatabase(getApplication()).favoritesDAO()
             dao.insertAll(crypto)
+            getDataFromSQLite()
         }
     }
 
     fun getDataFromSQLite(){
         progressBar.value=true
         launch {
-            val dao = FavoritesDatabase(getApplication()).cryptoDAO()
+            val dao = FavoritesDatabase(getApplication()).favoritesDAO()
             val crypto = dao.getAllCrypto()
             showCryptos(crypto)
         }
@@ -40,7 +41,7 @@ class FavoritesViewModel(application: Application) : BaseViewModel(application){
     fun deleteCrypto(crypto: Crypto){
         progressBar.value=true
         launch {
-            val dao = FavoritesDatabase(getApplication()).cryptoDAO()
+            val dao = FavoritesDatabase(getApplication()).favoritesDAO()
             dao.deleteCrypto(crypto.uuid)
         }
         getDataFromSQLite()

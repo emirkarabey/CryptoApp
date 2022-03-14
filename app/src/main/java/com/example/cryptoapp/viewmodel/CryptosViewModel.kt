@@ -27,6 +27,7 @@ class CryptosViewModel(application: Application) :BaseViewModel(application){
     val disposable = CompositeDisposable()
 
     fun refreshData(){
+
         val saveTime = mySharedPreferences.getTime()
         if (saveTime!=null&&saveTime!=0L&&System.nanoTime()-saveTime<updateTime){
             getDataFromSQLite()
@@ -61,16 +62,20 @@ class CryptosViewModel(application: Application) :BaseViewModel(application){
             val dao = CryptoDatabase(getApplication()).cryptoDAO()
             val crypto = dao.getAllCrypto()
             Toast.makeText(getApplication(),"veriler sqlitan geldi",Toast.LENGTH_LONG).show()
-            showCryptos(crypto)
+            //showCryptos(crypto)
+            getFavorite(crypto)
         }
     }
 
     fun showCryptos(cryptoList:List<Crypto>){
         progressBar.value=false
         cryptos.value=cryptoList
+
+
     }
 
     fun addSQLite(cryptoList: List<Crypto>){
+
         launch {
             val dao = CryptoDatabase(getApplication()).cryptoDAO()
             dao.deleteAllCrypto()
@@ -80,8 +85,28 @@ class CryptosViewModel(application: Application) :BaseViewModel(application){
                 cryptoList[i].uuid = uuidList[i].toInt()
                 i++
             }
-            showCryptos(cryptoList)
+            getFavorite(cryptoList)
+            //showCryptos(cryptoList)
         }
         mySharedPreferences.saveTime(System.nanoTime())
+    }
+
+
+    fun getFavorite(cryptoList: List<Crypto>){
+        launch {
+            val dao = FavoritesDatabase(getApplication()).favoritesDAO()
+            val fav_crypto=dao.getAllCrypto()
+            var i =0
+            while (i<fav_crypto.size){
+                if (fav_crypto[i].currency.equals(cryptoList[i].currency)){
+                    cryptoList[i].favorite=true
+                }
+                i++
+            }
+            if (i==fav_crypto.size){
+                showCryptos(cryptoList)
+            }
+        }
+
     }
 }

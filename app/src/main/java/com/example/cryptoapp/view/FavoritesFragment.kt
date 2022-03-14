@@ -43,12 +43,14 @@ class FavoritesFragment : Fragment() {
         val crypto = args.crypto
         if (crypto!=null){
             viewModel.addSQLite(crypto)
+        }else{
+            viewModel.getDataFromSQLite()
         }
         val delete= args.delete
         if (delete!=null){
             viewModel.deleteCrypto(delete)
         }
-        viewModel.getDataFromSQLite()
+
         favorites_recyclerView.layoutManager = GridLayoutManager(context,2)
         favorites_recyclerView.adapter=cryptoAdapter
         observeLiveData()

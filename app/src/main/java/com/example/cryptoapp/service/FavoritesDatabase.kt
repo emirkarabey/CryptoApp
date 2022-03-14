@@ -8,11 +8,10 @@ import com.example.cryptoapp.model.Crypto
 
 @Database(entities = arrayOf(Crypto::class), version = 1)
 abstract class FavoritesDatabase :RoomDatabase(){
-    abstract fun cryptoDAO(): CryptoDAO
+    abstract fun favoritesDAO(): CryptoDAO
 
     companion object {
-        @Volatile
-        private var instance: FavoritesDatabase? = null
+        @Volatile private var instance: FavoritesDatabase? = null
         private val lock = Any()
         operator fun invoke(context: Context) = instance ?: synchronized(lock) {
             instance ?: createDatabase(context).also {

@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ProgressBar
 import android.widget.SearchView
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -85,6 +86,12 @@ class CryptosFragment : Fragment() {
         viewModel.refreshData()
         recyclerView.layoutManager = GridLayoutManager(context,2)
         recyclerView.adapter = cryptoAdapter
+        swipeRefreshLayout.setOnRefreshListener {
+            progressBar.visibility=View.VISIBLE
+            recyclerView.visibility=View.GONE
+            viewModel.refreshData()
+            swipeRefreshLayout.isRefreshing=false
+        }
         observeLiveData()
     }
     fun observeLiveData(){
